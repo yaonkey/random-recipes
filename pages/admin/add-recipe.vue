@@ -42,6 +42,9 @@
         Добавить рецепт
       </button>
     </form>
+
+    <!-- Сообщение об успешном добавлении -->
+    <p v-if="message" class="text-green-500 text-center mt-4">{{ message }}</p>
   </div>
 
   <div v-else class="flex justify-center items-center min-h-screen">
@@ -71,6 +74,7 @@ const title = ref('')
 const content = ref('')
 const imageUrl = ref('')
 const isAuthenticated = ref(false)
+const message = ref('')
 const router = useRouter()
 
 const authenticate = () => {
@@ -97,7 +101,11 @@ const submitForm = async () => {
     })
 
     if (response.ok) {
-      router.push('/')
+      // Очистка формы после успешного добавления
+      title.value = ''
+      content.value = ''
+      imageUrl.value = ''
+      message.value = 'Рецепт успешно добавлен!'
     } else {
       alert('Ошибка при добавлении рецепта')
     }
