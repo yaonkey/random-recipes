@@ -54,6 +54,7 @@
           v-model="password"
           type="password"
           class="p-2 border border-gray-300 rounded mb-4 w-full"
+          @keydown.enter="authenticate"
       />
       <button
           @click="authenticate"
